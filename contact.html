@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Инвестиционный портал Белгородской области">
+        <link rel="icon" href="http://belgorodinvest.ru/static/img/favicon.png">
+        <title>Книга контактов</title>
+		
+        <link href="./contact_files/bootstrap.min.css" rel="stylesheet">        
+        <link href="./contact_files/custom.css" rel="stylesheet">		
+		
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>		
+</head>
+
+<body>
+
+	<div id="app">
+	<div class="search col-md-6">	
+		<input type="text" class="form-control" v-model="search" placeholder="Введите имя, номер телефона или отдел"/>
+	</div>
+		<div class="row py-3 mt-1">				
+			<div v-for="post in filteredList">
+				<div class="col-5 col-sm-4 col-md-4 col-lg-auto">
+					<img class="rounded-circle" v-bind:src="post.img"/>
+				</div>
+				<div class="col-6 col-sm-8 col-md-8 col-lg-auto">
+					<h5>{{ post.name }}</h5>
+					<p>{{ post.spec }}</p>
+					<p>{{ post.depart }}</p>
+					<p>мобильный телефон: {{ post.mob }}</p>
+					<p>email: {{ post.email }}</p>
+				</div>
+			</div>		
+		</div>
+	</div>
+	
+<script src="./contact_files/contactlist.js"></script>
+		
+<script>
+const app = new Vue ({
+  el: '#app',
+  data: {	  
+    search: '',
+	contacts
+	  },
+  computed: {
+    filteredList() {
+      return this.contacts.filter(post => {		  
+        return post.name.toLowerCase().includes(this.search.toLowerCase()) || post.mob.toLowerCase().includes(this.search.toLowerCase()) || post.depart.toLowerCase().includes(this.search.toLowerCase())
+      })
+	}
+  },
+});
+</script>
+	
+</body>
+</html>
